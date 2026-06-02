@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulador Decola Trimestral</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;margin:0;background:linear-gradient(180deg,#ff6a00,#ff8c1a);padding:14px}
+.container{max-width:900px;margin:auto}
+.hero{background:white;border-radius:24px;padding:20px;text-align:center;margin-bottom:14px}
+.hero h1{margin:0;color:#ff6a00;font-size:28px}
+.hero p{margin:6px 0 0;color:#666}
+.score{background:white;border-radius:24px;padding:20px;text-align:center;margin-bottom:14px}
+.score .value{font-size:56px;font-weight:800;color:#ff6a00}
+.bar{height:14px;background:#eee;border-radius:999px;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,#ff6a00,#ffb347);transition:1s}
+.card{background:white;border-radius:20px;padding:16px;margin-bottom:10px}
+.title{font-weight:700;color:#ff6a00;font-size:20px}
+.weight{color:#777;font-size:13px;margin-bottom:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+input{width:100%;padding:12px;border:1px solid #ddd;border-radius:12px}
+.btn{width:100%;padding:16px;border:none;border-radius:18px;background:#222;color:#fff;font-size:20px;font-weight:700;margin-top:10px}
+.msg{text-align:center;font-weight:700;margin-top:10px;color:#444}
+@media(max-width:700px){.grid{grid-template-columns:1fr} .score .value{font-size:44px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="hero">
+<h1>🚀 SIMULADOR DECOLA TRIMESTRAL</h1>
+<p>Coordenação 6391</p>
+</div>
+
+<div class="score">
+<div>🏆 ICM TOTAL</div>
+<div class="value" id="resultado">0,0%</div>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<div class="msg" id="msg">Preencha os campos e calcule</div>
+</div>
+
+<div class="card">
+<div class="title">💳 Crédito</div>
+<div class="weight">Peso 38%</div>
+<div class="grid">
+<div><label>Desafio</label><input id="d1" type="number"></div>
+<div><label>Realizado</label><input id="r1" type="number"></div>
+</div>
+</div>
+
+<div class="card">
+<div class="title">📦 Produtos</div>
+<div class="weight">Peso 28%</div>
+<div class="grid">
+<div><label>Desafio</label><input id="d2" type="number"></div>
+<div><label>Realizado</label><input id="r2" type="number"></div>
+</div>
+</div>
+
+<div class="card">
+<div class="title">💰 Recuperação</div>
+<div class="weight">Peso 23%</div>
+<div class="grid">
+<div><label>Desafio</label><input id="d3" type="number"></div>
+<div><label>Realizado</label><input id="r3" type="number"></div>
+</div>
+</div>
+
+<div class="card">
+<div class="title">🔥 Engajamento</div>
+<div class="weight">Peso 11%</div>
+<div class="grid">
+<div><label>Desafio</label><input id="d4" type="number"></div>
+<div><label>Realizado</label><input id="r4" type="number"></div>
+</div>
+</div>
+
+<div class="card">
+<div class="title">🎯 Gera</div>
+<div class="weight">Meta fixa: 1000</div>
+<input id="gera" type="number" placeholder="Realizado">
+</div>
+
+<div class="card">
+<div class="title">⭐ Satisfação</div>
+<div class="weight">Meta fixa: 100</div>
+<input id="sat" type="number" placeholder="Realizado">
+</div>
+
+<button class="btn" onclick="calc()">CALCULAR RESULTADO</button>
+
+</div>
+
+<script>
+function cap(v){ return Math.min(v,2); }
+
+function calc(){
+ let c = cap((Number(d1.value)?Number(r1.value)/Number(d1.value):0))*38;
+ let p = cap((Number(d2.value)?Number(r2.value)/Number(d2.value):0))*28;
+ let r = cap((Number(d3.value)?Number(r3.value)/Number(d3.value):0))*23;
+ let e = cap((Number(d4.value)?Number(r4.value)/Number(d4.value):0))*11;
+
+ let produtividade = c+p+r+e;
+ let geraPts = cap((Number(gera.value)||0)/1000)*30;
+ let satPts = cap((Number(sat.value)||0)/100)*20;
+
+ let total = produtividade + geraPts + satPts;
+
+ document.getElementById('resultado').innerHTML = total.toFixed(1)+'%';
+ document.getElementById('fill').style.width = Math.min(total,200)/2 + '%';
+
+ let msg='';
+ if(total<70) msg='⚠️ Atenção: abaixo da meta';
+ else if(total<=100) msg='👏 Bom desempenho';
+ else msg='🏆 Excelente desempenho';
+ document.getElementById('msg').innerHTML=msg;
+}
+</script>
+</body>
+</html>
