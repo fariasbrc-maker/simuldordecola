@@ -1,59 +1,186 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Simulador Decola Trimestral</title>
+<title>Simulador Decola Trimestral V2</title>
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(180deg,#ff6a00,#ff8c1a);}
-.wrap{max-width:760px;margin:auto;padding:16px}
-.card{background:#fff;border-radius:22px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
-.header{text-align:center;color:#fff;padding:12px}
-.header h1{margin:0;font-size:clamp(28px,5vw,54px)}
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.kpi{padding:16px;text-align:center}
-.kpi .n{font-size:clamp(28px,4vw,50px);color:#ff6200;font-weight:bold}
-.progress{padding:14px;margin:12px 0}
-.bar{height:14px;background:#eee;border-radius:20px;overflow:hidden}
-.fill{height:100%;width:0;background:#ff6200}
-.item{display:grid;grid-template-columns:90px 1fr 140px 140px;gap:10px;padding:14px;margin:10px 0;align-items:center}
-.icon{background:#ff6a00;color:#fff;border-radius:18px;height:72px;display:flex;align-items:center;justify-content:center;font-size:34px}
-input{padding:12px;border-radius:12px;border:1px solid #ddd;width:100%;text-align:center}
-.btn{width:100%;padding:16px;background:#ff6a00;color:#fff;border:none;border-radius:16px;font-size:24px;font-weight:bold}
-.result{padding:16px;margin-top:12px}
-.big{font-size:60px;color:#ff6200;font-weight:bold}
-@media(max-width:768px){
-.item{grid-template-columns:70px 1fr 1fr;}
-.item .title{grid-column:2/4}
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(180deg,#ff6a00,#ff8c1a);
+}
+.wrap{
+max-width:430px;
+margin:auto;
+padding:10px;
+}
+.card{
+background:#fff;
+border-radius:18px;
+box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+.header{
+text-align:center;
+color:#fff;
+padding:5px;
+}
+.header h1{
+margin:0;
+font-size:22px;
+line-height:1.1;
+font-weight:800;
+}
+.kpis{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:6px;
+margin-top:10px;
+}
+.kpi{
+padding:10px 6px;
+text-align:center;
+}
+.kpi .n{
+font-size:20px;
+color:#ff6200;
+font-weight:bold;
+}
+.progress{
+padding:10px;
+margin:10px 0;
+}
+.bar{
+height:14px;
+background:#eee;
+border-radius:20px;
+overflow:hidden;
+}
+.fill{
+height:100%;
+width:0;
+background:#ff6200;
+}
+.item{
+display:grid;
+grid-template-columns:70px 1fr 110px 110px;
+gap:8px;
+padding:12px;
+margin:8px 0;
+align-items:center;
+}
+.icon{
+background:#ff6a00;
+color:#fff;
+border-radius:16px;
+height:60px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+}
+.title{font-size:14px}
+.title b{font-size:16px}
+input{
+padding:10px;
+font-size:16px;
+height:42px;
+border-radius:12px;
+border:1px solid #ddd;
+width:100%;
+text-align:center;
+}
+.btn{
+width:100%;
+padding:14px;
+background:#ff6a00;
+color:#fff;
+border:none;
+border-radius:16px;
+font-size:20px;
+font-weight:bold;
+}
+.result{
+padding:12px;
+margin-top:10px;
+}
+.big{
+font-size:42px;
+color:#ff6200;
+font-weight:bold;
+}
+@media(max-width:430px){
+.item{
+grid-template-columns:60px 1fr 90px 90px;
+}
+input{
+font-size:14px;
+}
 }
 </style>
 </head>
 <body>
 <div class="wrap">
+
 <div class="header">
-<div style="font-size:50px">🚀</div>
-<h1>SIMULADOR DECOLA TRIMESTRAL</h1>
+<div style="font-size:42px">🚀</div>
+<h1>SIMULADOR DECOLA<br>TRIMESTRAL</h1>
 <div>Coordenação 6391</div>
 </div>
 
 <div class="kpis">
-<div class="card kpi"><div>🎯 META GERAL</div><div class="n">150%</div></div>
-<div class="card kpi"><div>🏆 ICM TOTAL</div><div class="n" id="icm">0%</div></div>
-<div class="card kpi"><div>📈 PERFORMANCE</div><div class="n" id="perf">0%</div></div>
+<div class="card kpi"><div>🎯 META</div><div class="n">150%</div></div>
+<div class="card kpi"><div>🏆 ICM</div><div class="n" id="icm">0%</div></div>
+<div class="card kpi"><div>📈 PERF.</div><div class="n" id="perf">0%</div></div>
 </div>
 
 <div class="card progress">
-<div style="display:flex;justify-content:space-between"><b>PROGRESSO GERAL</b><b id="pct">0%</b></div>
+<div style="display:flex;justify-content:space-between"><b>PROGRESSO</b><b id="pct">0%</b></div>
 <div class="bar"><div class="fill" id="fill"></div></div>
 </div>
 
-<div class="card item"><div class="icon">💳</div><div class="title"><b>Crédito</b><br>Peso 38%</div><input id="d1" placeholder="Desafio"><input id="r1" placeholder="Realizado"></div>
-<div class="card item"><div class="icon">📦</div><div class="title"><b>Produtos</b><br>Peso 28%</div><input id="d2"><input id="r2"></div>
-<div class="card item"><div class="icon">💰</div><div class="title"><b>Recuperação</b><br>Peso 23%</div><input id="d3"><input id="r3"></div>
-<div class="card item"><div class="icon">👥</div><div class="title"><b>Engajamento</b><br>Peso 11%</div><input id="d4"><input id="r4"></div>
+<div class="card item">
+<div class="icon">💳</div>
+<div class="title"><b>Crédito</b><br>Peso 38%</div>
+<input id="d1" placeholder="Desafio">
+<input id="r1" placeholder="Realizado">
+</div>
 
-<div class="card item"><div class="icon">🎯</div><div class="title"><b>Gera</b><br>Meta fixa 1000</div><div></div><input id="gera"></div>
-<div class="card item"><div class="icon">⭐</div><div class="title"><b>Satisfação</b><br>Meta fixa 100</div><div></div><input id="sat"></div>
+<div class="card item">
+<div class="icon">📦</div>
+<div class="title"><b>Produtos</b><br>Peso 28%</div>
+<input id="d2" placeholder="Desafio">
+<input id="r2" placeholder="Realizado">
+</div>
+
+<div class="card item">
+<div class="icon">💰</div>
+<div class="title"><b>Recuperação</b><br>Peso 23%</div>
+<input id="d3" placeholder="Desafio">
+<input id="r3" placeholder="Realizado">
+</div>
+
+<div class="card item">
+<div class="icon">👥</div>
+<div class="title"><b>Engajamento</b><br>Peso 11%</div>
+<input id="d4" placeholder="Desafio">
+<input id="r4" placeholder="Realizado">
+</div>
+
+<div class="card item">
+<div class="icon">🎯</div>
+<div class="title"><b>Gera</b><br>Meta 1000</div>
+<div></div>
+<input id="gera" placeholder="Realizado">
+</div>
+
+<div class="card item">
+<div class="icon">⭐</div>
+<div class="title"><b>Satisfação</b><br>Meta 100</div>
+<div></div>
+<input id="sat" placeholder="Realizado">
+</div>
 
 <button class="btn" onclick="calc()">🧮 CALCULAR RESULTADO</button>
 
@@ -61,6 +188,7 @@ input{padding:12px;border-radius:12px;border:1px solid #ddd;width:100%;text-alig
 <div>RESULTADO FINAL</div>
 <div class="big" id="total">0%</div>
 </div>
+
 </div>
 
 <script>
@@ -73,7 +201,9 @@ t+=c((+r3.value||0)/(+d3.value||1))*23;
 t+=c((+r4.value||0)/(+d4.value||1))*11;
 t+=c((+gera.value||0)/1000)*30;
 t+=c((+sat.value||0)/100)*20;
+
 let p=(t/150)*100;
+
 icm.innerText=t.toFixed(1)+'%';
 perf.innerText=p.toFixed(1)+'%';
 total.innerText=t.toFixed(1)+'%';
@@ -81,4 +211,6 @@ pct.innerText=p.toFixed(1)+'%';
 fill.style.width=Math.min(p,100)+'%';
 }
 </script>
-</body></html>
+
+</body>
+</html>
