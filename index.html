@@ -4,215 +4,81 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Simulador Decola Trimestral V2</title>
+<title>Simulador Decola Trimestral V4</title>
 <style>
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:linear-gradient(180deg,#ff6a00,#ff8c1a);
-}
-.wrap{
-max-width:430px;
-margin:auto;
-padding:10px;
-}
-.card{
-background:#fff;
-border-radius:18px;
-box-shadow:0 4px 12px rgba(0,0,0,.15);
-}
-.header{
-text-align:center;
-color:#fff;
-padding:5px;
-}
-.header h1{
-margin:0;
-font-size:22px;
-line-height:1.1;
-font-weight:800;
-}
-.kpis{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:6px;
-margin-top:10px;
-}
-.kpi{
-padding:10px 6px;
-text-align:center;
-}
-.kpi .n{
-font-size:20px;
-color:#ff6200;
-font-weight:bold;
-}
-.progress{
-padding:10px;
-margin:10px 0;
-}
-.bar{
-height:14px;
-background:#eee;
-border-radius:20px;
-overflow:hidden;
-}
-.fill{
-height:100%;
-width:0;
-background:#ff6200;
-}
-.item{
-.item{
-display:grid;
-grid-template-columns:60px 1fr 75px 75px;
-gap:8px;
-padding:12px;
-margin:8px 0;
-align-items:center;
-}
-.icon{
-background:#ff6a00;
-color:#fff;
-border-radius:16px;
-height:52px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:24px;
-}
-.title{font-size:14px}
-.title b{font-size:16px}
-input{
-padding:6px;
-font-size:14px;
-height:28px;
-border-radius:10px;
-border:1px solid #ddd;
-width:100%;
-text-align:center;
-font-weight:600;
-}
-.btn{
-width:100%;
-padding:14px;
-background:#ff6a00;
-color:#fff;
-border:none;
-border-radius:16px;
-font-size:20px;
-font-weight:bold;
-}
-.result{
-padding:12px;
-margin-top:10px;
-}
-.big{
-font-size:42px;
-color:#ff6200;
-font-weight:bold;
-}
-@media(max-width:430px){
-.item{
-grid-template-columns:60px 1fr 90px 90px;
-}
-input{
-font-size:14px;
-}
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(180deg,#ff6a00,#ff8c1a)}
+.wrap{max-width:430px;margin:auto;padding:8px}
+.header{text-align:center;color:#fff;padding:4px 0 8px}
+.header h1{margin:0;font-size:22px;line-height:1.05}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.card{background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.kpi{padding:8px;text-align:center}
+.kpi .v{font-size:18px;font-weight:700;color:#ff6200}
+.progress{padding:8px;margin:8px 0}
+.bar{height:10px;background:#eee;border-radius:99px;overflow:hidden}
+.fill{height:100%;width:0;background:#ff6200}
+.item{display:grid;grid-template-columns:40px 1fr 70px 70px;gap:6px;align-items:center;padding:8px;margin:6px 0}
+.icon{width:40px;height:40px;border-radius:12px;background:#ff6200;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px}
+.tt{font-size:13px;font-weight:700;line-height:1.1}
+.tt small{display:block;color:#ff6200}
+input{width:100%;height:28px;border:1px solid #ddd;border-radius:8px;text-align:center;font-size:12px}
+.btn{width:100%;padding:10px;border:none;border-radius:14px;background:#ff6200;color:#fff;font-weight:700;font-size:16px;margin-top:6px}
+.result{padding:10px;margin-top:8px;text-align:center}
+.big{font-size:32px;font-weight:800;color:#ff6200}
 </style>
 </head>
 <body>
 <div class="wrap">
-
 <div class="header">
-<div style="font-size:42px">🚀</div>
-<h1>SIMULADOR DECOLA<br>TRIMESTRAL</h1>
+<div>🚀</div>
+<h1>SIMULADOR DECOLA TRIMESTRAL</h1>
 <div>Coordenação 6391</div>
 </div>
 
 <div class="kpis">
-<div class="card kpi"><div>🎯 META</div><div class="n">150%</div></div>
-<div class="card kpi"><div>🏆 ICM</div><div class="n" id="icm">0%</div></div>
-<div class="card kpi"><div>📈 PERF.</div><div class="n" id="perf">0%</div></div>
+<div class="card kpi">🎯<div class="v">150%</div></div>
+<div class="card kpi">🏆<div class="v" id="icm">0%</div></div>
+<div class="card kpi">📈<div class="v" id="perf">0%</div></div>
 </div>
 
 <div class="card progress">
-<div style="display:flex;justify-content:space-between"><b>PROGRESSO</b><b id="pct">0%</b></div>
+<div style="display:flex;justify-content:space-between;font-size:12px"><b>Progresso</b><span id="pct">0%</span></div>
 <div class="bar"><div class="fill" id="fill"></div></div>
 </div>
 
-<div class="card item">
-<div class="icon">💳</div>
-<div class="title"><b>Crédito</b><br>Peso 38%</div>
-<input id="d1" placeholder="Desafio">
-<input id="r1" placeholder="Realizado">
-</div>
+<div class="card item"><div class="icon">💳</div><div class="tt">Crédito<small>38%</small></div><input id="d1" placeholder="D"><input id="r1" placeholder="R"></div>
+<div class="card item"><div class="icon">📦</div><div class="tt">Produtos<small>28%</small></div><input id="d2" placeholder="D"><input id="r2" placeholder="R"></div>
+<div class="card item"><div class="icon">💰</div><div class="tt">Recup.<small>23%</small></div><input id="d3" placeholder="D"><input id="r3" placeholder="R"></div>
+<div class="card item"><div class="icon">👥</div><div class="tt">Engaj.<small>11%</small></div><input id="d4" placeholder="D"><input id="r4" placeholder="R"></div>
+<div class="card item"><div class="icon">🎯</div><div class="tt">Gera<small>1000</small></div><div></div><input id="gera" placeholder="R"></div>
+<div class="card item"><div class="icon">⭐</div><div class="tt">Satisf.<small>100</small></div><div></div><input id="sat" placeholder="R"></div>
 
-<div class="card item">
-<div class="icon">📦</div>
-<div class="title"><b>Produtos</b><br>Peso 28%</div>
-<input id="d2" placeholder="Desafio">
-<input id="r2" placeholder="Realizado">
-</div>
-
-<div class="card item">
-<div class="icon">💰</div>
-<div class="title"><b>Recuperação</b><br>Peso 23%</div>
-<input id="d3" placeholder="Desafio">
-<input id="r3" placeholder="Realizado">
-</div>
-
-<div class="card item">
-<div class="icon">👥</div>
-<div class="title"><b>Engajamento</b><br>Peso 11%</div>
-<input id="d4" placeholder="Desafio">
-<input id="r4" placeholder="Realizado">
-</div>
-
-<div class="card item">
-<div class="icon">🎯</div>
-<div class="title"><b>Gera</b><br>Meta 1000</div>
-<div></div>
-<input id="gera" placeholder="Realizado">
-</div>
-
-<div class="card item">
-<div class="icon">⭐</div>
-<div class="title"><b>Satisfação</b><br>Meta 100</div>
-<div></div>
-<input id="sat" placeholder="Realizado">
-</div>
-
-<button class="btn" onclick="calc()">🧮 CALCULAR RESULTADO</button>
+<button class="btn" onclick="calc()">CALCULAR</button>
 
 <div class="card result">
-<div>RESULTADO FINAL</div>
+<div>🏆 Resultado Final</div>
 <div class="big" id="total">0%</div>
 </div>
-
 </div>
 
 <script>
-function c(v){return Math.min(v,2)}
+function cap(v){return Math.min(v,2)}
 function calc(){
 let t=0;
-t+=c((+r1.value||0)/(+d1.value||1))*38;
-t+=c((+r2.value||0)/(+d2.value||1))*28;
-t+=c((+r3.value||0)/(+d3.value||1))*23;
-t+=c((+r4.value||0)/(+d4.value||1))*11;
-t+=c((+gera.value||0)/1000)*30;
-t+=c((+sat.value||0)/100)*20;
-
+t+=cap((+r1.value||0)/(+d1.value||1))*38;
+t+=cap((+r2.value||0)/(+d2.value||1))*28;
+t+=cap((+r3.value||0)/(+d3.value||1))*23;
+t+=cap((+r4.value||0)/(+d4.value||1))*11;
+t+=cap((+gera.value||0)/1000)*30;
+t+=cap((+sat.value||0)/100)*20;
 let p=(t/150)*100;
-
-icm.innerText=t.toFixed(1)+'%';
-perf.innerText=p.toFixed(1)+'%';
-total.innerText=t.toFixed(1)+'%';
-pct.innerText=p.toFixed(1)+'%';
+icm.textContent=t.toFixed(1)+'%';
+perf.textContent=p.toFixed(1)+'%';
+pct.textContent=p.toFixed(1)+'%';
+total.textContent=t.toFixed(1)+'%';
 fill.style.width=Math.min(p,100)+'%';
 }
 </script>
-
 </body>
 </html>
